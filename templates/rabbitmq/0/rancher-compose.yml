@@ -1,0 +1,29 @@
+.catalog:
+  name: RabbitMQ
+  version: 3.6.5
+  description: RabbitMQ - Single nstance
+  uuid: 0
+  questions:
+    - variable: username
+      label: Username/vHost
+      description: vHost will be set as /<username>
+      type: string
+      required: true
+    - variable: password
+      label: Password
+      type: password
+      required: true
+
+rabbit:
+  scale: 1
+  health_check:
+    port: 5672
+    interval: 10000
+    unhealthy_threshold: 2
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
+    strategy: none
+  upgrade_strategy:
+    batch_size: 1
+    interval_millis: 120000

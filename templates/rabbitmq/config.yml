@@ -1,0 +1,4 @@
+name: RabbitMQ
+description: RabbitMQ - Single Instance
+version: 3.6.5
+category: LeanKit Services
