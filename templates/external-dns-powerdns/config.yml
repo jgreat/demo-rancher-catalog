@@ -1,0 +1,4 @@
+name: Rancher External DNS (PowerDNS)
+description: Rancher External DNS service powered by PowerDNS.
+version: v0.4.1-powerdns
+category: Rancher Services
