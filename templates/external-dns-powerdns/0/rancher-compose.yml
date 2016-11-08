@@ -10,7 +10,7 @@
       type: string
       description: http[s] base url to PowerDNS
       required: true
-      default: http://powerdns.example.com:8100
+      default: https://powerdns.example.com:8100
     - variable: POWERDNS_API_KEY
       label: PowerDNS API Key
       type: password
