@@ -1,0 +1,54 @@
+.catalog:
+  name: cowpoke
+  version: "v2.1.7"
+  description: Cowpoke
+  uuid: cowpoke-2.1.7
+  questions:
+    - variable: rancher_user_key
+      label: Rancher Account API Key
+      type: string
+      required: true
+    - variable: rancher_user_secret
+      label: Rancher account API secret
+      type: password
+      required: true
+    - variable: rancher_url
+      label: Rancher server URL
+      type: string
+      required: true
+    - variable: cert_name
+      label: SSL Cert Name
+      description: SSL Cert Regestered in Rancher
+      type: certificate
+      required: true
+    - variable: slack_token
+      label: Slack Token
+      description: Slack access token for deployment notifications
+      type: password
+    - variable: slack_channels
+      label: Slack Channels
+      description: Comma delimited list for deployment notification
+      type: string
+
+cowpoke:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  default_cert: "${cert_name}"
+  health_check:
+    port: 42
+    interval: 10000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 10000
+
+cowpoke-app:
+  scale: 1
+  health_check:
+    port: 9300
+    interval: 10000
+    unhealthy_threshold: 2
+    strategy: none
+    request_line: OPTIONS /api HTTP/1.1
+    healthy_threshold: 2
+    response_timeout: 2000

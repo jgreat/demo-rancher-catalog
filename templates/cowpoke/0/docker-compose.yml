@@ -1,0 +1,24 @@
+cowpoke:
+  image: rancher/load-balancer-service
+  ports:
+    - 9300:9300/tcp
+  links:
+    - cowpoke-app:cowpoke-app
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.loadbalancer.ssl.ports: "9300"
+cowpoke-app:
+  image: leankit/cowpoke:v2.1.7
+  expose:
+    - 9300/tcp
+  environment:
+    HOST_PORT: "9300"
+    SLACK_TOKEN: ${slack_token}
+    RANCHER_USER_KEY: ${rancher_user_key}
+    RANCHER_USER_SECRET: ${rancher_user_secret}
+    RANCHER_URL: ${rancher_url}
+    SLACK_TOKEN: ${slack_token}
+    SLACK_CHANNELS: ${slack_channels}
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
