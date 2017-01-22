@@ -38,7 +38,7 @@ services:
           target_port: 80
         - priority: 2
           protocol: http
-          selctor: fakefor=httpsredirect
+          selector: fakefor=httpsredirect
           source_port: 80
           target_port: 80
     health_check:
