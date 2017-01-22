@@ -2,7 +2,6 @@
   name: MSSQL
   version: 0.0-1
   description:
-  uuid: mssql-1
   questions:
     - variable: sql_hostname
       label: FQDN of MSSQL instance.
@@ -30,5 +29,8 @@
       type: password
       required: true
 
-mssql:
-  hostname: ${sql_hostname}
+version: "2"
+services:
+  mssql:
+    start_on_create: true
+    hostname: ${sql_hostname}

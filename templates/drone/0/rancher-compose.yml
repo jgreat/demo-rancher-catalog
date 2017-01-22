@@ -2,7 +2,6 @@
   name: drone
   version: 0.4-5
   description: Drone CI
-  uuid: drone-0.4-5
   questions:
     - variable: github_id
       label: GitHub Application API ID
@@ -18,25 +17,39 @@
       type: certificate
       required: true
 
-drone-server:
-  scale: 1
-  health_check:
-    port: 80
-    interval: 10000
-    unhealthy_threshold: 2
-    strategy: none
-    request_line: ''
-    healthy_threshold: 2
-    response_timeout: 2000
+version: "2"
+services:
+  drone:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      default_cert: "${cert_name}"
+      config: |-
+        frontend http-frontend
+          bind *:80
+          mode http
+          redirect scheme https code 302 if !{ ssl_fc }
+      port_rules:
+        - priority: 1
+          protocol: https
+          service: drone-server
+          source_port: 443
+          target_port: 80
+    health_check:
+      port: 42
+      interval: 10000
+      unhealthy_threshold: 2
+      healthy_threshold: 2
+      response_timeout: 2000
 
-drone:
-  scale: 1
-  load_balancer_config:
-    haproxy_config: {}
-  default_cert: "${cert_name}"
-  health_check:
-    port: 42
-    interval: 5000
-    unhealthy_threshold: 3
-    healthy_threshold: 2
-    response_timeout: 2000
+  drone-server:
+    scale: 1
+    health_check:
+      port: 80
+      interval: 10000
+      unhealthy_threshold: 2
+      strategy: none
+      request_line: ''
+      healthy_threshold: 2
+      response_timeout: 2000
