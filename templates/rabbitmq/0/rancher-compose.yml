@@ -1,6 +1,6 @@
 .catalog:
   name: RabbitMQ
-  version: 3.6.5
+  version: 3.6.6
   description: RabbitMQ - Single nstance
   questions:
     - variable: username
@@ -14,7 +14,7 @@
       required: true
 
 version: "2"
-  rabbit:
+  rabbitmq:
     scale: 1
     start_on_create: true
     health_check:
