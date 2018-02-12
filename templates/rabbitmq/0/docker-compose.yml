@@ -10,13 +10,7 @@ services:
       LK_RANCHER_SERVICE_DISCOVERY: true
       RABBITMQ_DEFAULT_USER: "${username}"
       RABBITMQ_DEFAULT_PASS: "${password}"
-      RABBITMQ_DEFAULT_VHOST: "/${username}"
+      RABBITMQ_DEFAULT_VHOST: "/${vhost}"
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
-      io.leankit.service.username: "${username}"
-      io.leankit.service.password: "${password}"
-      io.leankit.service.vhost: "%2f${username}"
-      io.leankit.service.port.amqp: 5672/tcp
-      io.leankit.service.port.api: 15672/tcp
-      io.leankit.service.port.cluster: 25672/tcp

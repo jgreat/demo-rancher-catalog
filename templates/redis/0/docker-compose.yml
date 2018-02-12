@@ -1,0 +1,33 @@
+version: "2"
+services:
+  master:
+    image: redis:4.0.8-alpine
+    ports:
+      - "6379:6379/tcp"
+    command:
+      - "redis-server"
+      - "--save 300 1"
+      - "--maxmemory ${max_memory}gb"
+    labels:
+      io.leankit.service.port: 6379/tcp
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/slave
+
+  slave:
+    image: redis:4.0.8-alpine
+    ports:
+      - "6379:6379/tcp"
+    command:
+      - "redis-server"
+      - "--save 300 1"
+      - "--maxmemory ${max_memory}gb"
+      - "--repl-diskless-sync yes"
+      - "--slaveof master 6379"
+    links:
+      - master:master
+    labels:
+      io.leankit.service.port: 6379/tcp
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/master

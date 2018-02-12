@@ -1,0 +1,37 @@
+.catalog:
+  name: Redis
+  version: 3.2.0-6
+  description: Redis - Master/Slave (no failover)
+  uuid: redis-6
+  questions:
+    - variable: max_memory
+      label: Redis Max Memory
+      description: in GB (Don't Excede the Memory of a Server)
+      type: int
+      required: true
+      default: 2
+
+version: "2"
+service:
+  master:
+    scale: 1
+    health_check:
+      port: 6379
+      interval: 10000
+      strategy: none
+      unhealthy_threshold: 2
+      request_line: ''
+      healthy_threshold: 1
+      response_timeout: 1000
+  
+  slave:
+    scale: 1
+    health_check:
+      port: 6379
+      interval: 10000
+      strategy: none
+      unhealthy_threshold: 2
+      request_line: ''
+      healthy_threshold: 1
+      response_timeout: 1000
+      

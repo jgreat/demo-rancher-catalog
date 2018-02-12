@@ -4,12 +4,16 @@
   description: RabbitMQ - Single nstance
   questions:
     - variable: username
-      label: Username/vHost
+      label: Username
       description: vHost will be set as /<username>
       type: string
       required: true
     - variable: password
       label: Password
+      type: password
+      required: true
+    - variable: vhost
+      label: VHost
       type: password
       required: true
 

@@ -1,0 +1,4 @@
+name: Redis
+description: Redis - Master/Slave for key replication (no failover)
+version: 4.0.8-rancher.0
+category: Services
