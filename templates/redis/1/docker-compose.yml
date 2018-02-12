@@ -2,8 +2,8 @@ version: "2"
 services:
   master:
     image: redis:4.0.8-alpine
-    ports:
-      - "6379:6379/tcp"
+    expose:
+      - "6379"
     command:
       - "redis-server"
       - "--save 300 1"
@@ -14,8 +14,8 @@ services:
 
   slave:
     image: redis:4.0.8-alpine
-    ports:
-      - "6379:6379/tcp"
+    expose:
+      - "6379"
     command:
       - "redis-server"
       - "--save 300 1"

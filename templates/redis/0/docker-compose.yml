@@ -3,7 +3,7 @@ services:
   master:
     image: redis:4.0.7-alpine
     ports:
-      - "6379:6379/tcp"
+      - "6379"
     command:
       - "redis-server"
       - "--save 300 1"
@@ -15,7 +15,7 @@ services:
   slave:
     image: redis:4.0.7-alpine
     ports:
-      - "6379:6379/tcp"
+      - "6379"
     command:
       - "redis-server"
       - "--save 300 1"
