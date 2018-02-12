@@ -1,8 +1,7 @@
 .catalog:
   name: Redis
-  version: 3.2.0-6
+  version: 4.0.8-rancher.0
   description: Redis - Master/Slave (no failover)
-  uuid: redis-6
   questions:
     - variable: max_memory
       label: Redis Max Memory
