@@ -13,4 +13,3 @@ services:
       RABBITMQ_DEFAULT_VHOST: "/${vhost}"
     labels:
       io.rancher.container.hostname_override: container_name
-      io.rancher.container.pull_image: always

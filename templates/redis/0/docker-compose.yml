@@ -9,8 +9,6 @@ services:
       - "--save 300 1"
       - "--maxmemory ${max_memory}gb"
     labels:
-      io.leankit.service.port: 6379/tcp
-      io.rancher.container.pull_image: always
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/slave
 
@@ -27,7 +25,5 @@ services:
     links:
       - master:master
     labels:
-      io.leankit.service.port: 6379/tcp
-      io.rancher.container.pull_image: always
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/master
